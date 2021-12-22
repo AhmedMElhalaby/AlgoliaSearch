@@ -21,8 +21,16 @@ class PostController extends Controller
     public function index(Request $request)
     {
         $Posts = [];
-        if ($request->filled('q')) {
-            $Posts = Post::search($request->q)->get();
+        if ($this->filled('search_type')) {
+            if ($this->search_type == 'algolia') {
+                if ($request->filled('q')) {
+                    $Posts = Post::search($request->q)->get();
+                }
+            }else{
+                if ($request->filled('q')) {
+                    $Posts = Post::where('title','LIKE','%'.$request->q.'')->orWhere('body','LIKE','%'.$request->q.'')->get();
+                }
+            }
         }
         return view('posts',compact('Posts'));
     }

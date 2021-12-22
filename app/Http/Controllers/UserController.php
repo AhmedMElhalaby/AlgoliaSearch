@@ -20,8 +20,16 @@ class UserController extends Controller
     public function index(Request $request)
     {
         $Users = [];
-        if ($request->filled('q')) {
-            $Users = User::search($request->q)->get();
+        if ($this->filled('search_type')) {
+            if ($this->search_type == 'algolia') {
+                if ($request->filled('q')) {
+                    $Users = User::search($request->q)->get();
+                }
+            }else{
+                if ($request->filled('q')) {
+                    $Users = User::where('name','LIKE','%'.$request->q.'')->orWhere('email','LIKE','%'.$request->q.'')->get();
+                }
+            }
         }
         return view('users',compact('Users'));
     }
