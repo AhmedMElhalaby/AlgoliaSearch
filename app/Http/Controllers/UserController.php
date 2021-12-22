@@ -20,8 +20,8 @@ class UserController extends Controller
     public function index(Request $request)
     {
         $Users = [];
-        if ($this->filled('search_type')) {
-            if ($this->search_type == 'algolia') {
+        if ($request->filled('search_type')) {
+            if ($request->search_type == 'algolia') {
                 if ($request->filled('q')) {
                     $Users = User::search($request->q)->get();
                 }

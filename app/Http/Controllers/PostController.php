@@ -21,8 +21,8 @@ class PostController extends Controller
     public function index(Request $request)
     {
         $Posts = [];
-        if ($this->filled('search_type')) {
-            if ($this->search_type == 'algolia') {
+        if ($request->filled('search_type')) {
+            if ($request->search_type == 'algolia') {
                 if ($request->filled('q')) {
                     $Posts = Post::search($request->q)->get();
                 }
