@@ -27,7 +27,10 @@ class UserController extends Controller
                 }
             }else{
                 if ($request->filled('q')) {
-                    $Users = User::where('name','LIKE','%'.$request->q.'%')->orWhere('email','LIKE','%'.$request->q.'%')->get();
+                    $q = $request->q;
+                    $Users = User::where(function($query) use ($q){
+                        return $query->where('name','LIKE','%'.$q.'%')->orWhere('email','LIKE','%'.$q.'%');
+                    })->get();
                 }
             }
         }
