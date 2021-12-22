@@ -26,7 +26,7 @@
             <div class="max-w-6xl mx-auto sm:px-6 lg:px-8">
                 <ul>
                     @foreach($Posts as $Post)
-                        <li>{{'#' . $Post->id . ' - ' . $Post->title}}<br>{{$Post->body}}</li>
+                        <li style="color:#fff">{{'#' . $Post->id . ' - ' . $Post->title}}<br>{{$Post->body}}</li>
                     @endforeach
                 </ul>
             </div>

@@ -26,7 +26,7 @@
             <div class="max-w-6xl mx-auto sm:px-6 lg:px-8">
                 <ul>
                     @foreach($Users as $User)
-                        <li>{{'#' . $User->id . ' - ' . $User->name}}<br>{{$User->email}}</li>
+                        <li style="color:#fff">{{'#' . $User->id . ' - ' . $User->name}}<br>{{$User->email}}</li>
                     @endforeach
                 </ul>
             </div>
