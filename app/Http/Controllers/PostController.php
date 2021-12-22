@@ -28,7 +28,7 @@ class PostController extends Controller
                 }
             }else{
                 if ($request->filled('q')) {
-                    $Posts = Post::where('title','LIKE','%'.$request->q.'')->orWhere('body','LIKE','%'.$request->q.'')->get();
+                    $Posts = Post::where('title','LIKE','%'.$request->q.'%')->orWhere('body','LIKE','%'.$request->q.'%')->get();
                 }
             }
         }
