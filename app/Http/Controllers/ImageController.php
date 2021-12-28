@@ -25,7 +25,7 @@ class ImageController extends Controller
         if ($request->filled('search_type')) {
             if ($request->search_type == 'algolia') {
                 if ($request->filled('q')) {
-                    $Tags = Tag::search($request->q)->pluck('image_id');
+                    $Tags = Tag::search($request->q)->get()->pluck('image_id');
                     $Images = Image::whereIn('id',$Tags)->get();
                 }
             }else{
