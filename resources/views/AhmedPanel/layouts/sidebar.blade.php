@@ -6,6 +6,7 @@
 </li>
 @foreach(\App\Models\Link::whereNull('parent_id')->get() as $links)
     @if (auth('dashboard')->user()->can($links->permission->getKey()))
+        @if(count($links->children)>0)
         <li class="nav-item ">
             <a class="nav-link collapsed" data-toggle="collapse" href="#{{$links->getUrl()}}" aria-expanded="false">
                 <i class="material-icons">keyboard_arrow_down</i>
@@ -26,5 +27,13 @@
                 </ul>
             </div>
         </li>
+        @else
+            <li class="nav-item @if(strpos(url()->current().'/' , url('dashboard/'.$links->getUrl()).'/')===0) active @endif">
+                <a href="{{url('dashboard/'.$links->getUrl())}}" class="nav-link">
+                    <i class="material-icons">{{$links->getIcon()}}</i>
+                    <p>{{app()->getLocale()=='ar'?$links->getNameAr():$links->getName()}}</p>
+                </a>
+            </li>
+        @endif
     @endif
 @endforeach

@@ -33,167 +33,21 @@ class InstallSeeder extends Seeder
         $Role->save();
         $Role->refresh();
         $PermissionsAndLinks = [
-            'AppManagement'=>[
-                'name'=>'App Management',
-                'name_ar'=>'إدارة التطبيق',
-                'key'=>'app_managements',
-                'Children'=>[
-                    'Employees'=>[
-                        'name'=>'Employees',
-                        'name_ar'=>'الموظفين',
-                        'key'=>'employees',
-                        'icon'=>'group'
-                    ],
-                    'Roles'=>[
-                        'name'=>'Roles',
-                        'name_ar'=>'الأدوار',
-                        'key'=>'roles',
-                        'icon'=>'accessibility'
-                    ],
-                ]
+            'Images'=>[
+                'name'=>'Images',
+                'name_ar'=>'الصور',
+                'key'=>'images',
+                'icon'=>'image',
+                'Children'=>[]
             ],
-            'AppData'=>[
-                'name'=>'App Data',
-                'name_ar'=>'بيانات التطبيق',
-                'key'=>'app_data',
-                'Children'=>[
-                    'Settings'=>[
-                        'name'=>'Settings',
-                        'name_ar'=>'الإعدادات',
-                        'key'=>'settings',
-                        'icon'=>'settings'
-                    ],
-                    'Images'=>[
-                        'name'=>'Images',
-                        'name_ar'=>'الصور',
-                        'key'=>'images',
-                        'icon'=>'image'
-                    ],
-                    'Tags'=>[
-                        'name'=>'Tags',
-                        'name_ar'=>'التاقات',
-                        'key'=>'tags',
-                        'icon'=>'card_membership'
-                    ],
-                ]
+            'Tags'=>[
+                'name'=>'Tags',
+                'name_ar'=>'التاقات',
+                'key'=>'tags',
+                'icon'=>'card_membership',
+                'Children'=>[]
             ],
         ];
-        $Settings = [
-            'privacy'=>[
-                'name'=>'Privacy Policy',
-                'name_ar'=>'سياسة الخصوصية',
-                'value'=>'Privacy Policy',
-                'value_ar'=>'سياسة الخصوصية',
-                'key'=>'privacy',
-                'type'=>Constant::SETTING_TYPE['Page'],
-            ],
-            'about'=>[
-                'name'=>'About Us',
-                'name_ar'=>'من نحن',
-                'value'=>'About Us',
-                'value_ar'=>'من نحن',
-                'key'=>'about',
-                'type'=>Constant::SETTING_TYPE['Page'],
-            ],
-            'terms'=>[
-                'name'=>'Terms And Conditions',
-                'name_ar'=>'الشروط والأحكام',
-                'value'=>'Terms And Conditions',
-                'value_ar'=>'الشروط والأحكام',
-                'key'=>'terms',
-                'type'=>Constant::SETTING_TYPE['Page'],
-            ],
-            'cookies'=>[
-                'name'=>'Cookies',
-                'name_ar'=>'ملفات تعريف الارتباط',
-                'value'=>'Cookies',
-                'value_ar'=>'ملفات تعريف الارتباط',
-                'key'=>'cookies',
-                'type'=>Constant::SETTING_TYPE['Page'],
-            ],
-            'support'=>[
-                'name'=>'Support',
-                'name_ar'=>'الدعم',
-                'value'=>'Support',
-                'value_ar'=>'الدعم',
-                'key'=>'support',
-                'type'=>Constant::SETTING_TYPE['Page'],
-            ],
-            'twitter'=>[
-                'name'=>'Twitter',
-                'name_ar'=>'حساب تويتر',
-                'value'=>'',
-                'value_ar'=>'',
-                'key'=>'twitter',
-                'type'=>Constant::SETTING_TYPE['Values'],
-            ],
-            'facebook'=>[
-                'name'=>'Facebook',
-                'name_ar'=>'حساب الفيسبوك',
-                'value'=>'',
-                'value_ar'=>'',
-                'key'=>'facebook',
-                'type'=>Constant::SETTING_TYPE['Values'],
-            ],
-            'instagram'=>[
-                'name'=>'Instagram',
-                'name_ar'=>'حساب الانستقرام',
-                'value'=>'',
-                'value_ar'=>'',
-                'key'=>'instagram',
-                'type'=>Constant::SETTING_TYPE['Values'],
-            ],
-            'linkedin'=>[
-                'name'=>'LinkedIn',
-                'name_ar'=>'حساب اللينكد ان',
-                'value'=>'',
-                'value_ar'=>'',
-                'key'=>'linkedin',
-                'type'=>Constant::SETTING_TYPE['Values'],
-            ],
-            'email'=>[
-                'name'=>'Email',
-                'name_ar'=>'البريد الالكتروني',
-                'value'=>'',
-                'value_ar'=>'',
-                'key'=>'email',
-                'type'=>Constant::SETTING_TYPE['Values'],
-            ],
-            'mobile'=>[
-                'name'=>'Mobile',
-                'name_ar'=>'رقم الجوال',
-                'value'=>'',
-                'value_ar'=>'',
-                'key'=>'mobile',
-                'type'=>Constant::SETTING_TYPE['Values'],
-            ],
-            'app_store_link'=>[
-                'name'=>'App Store Link',
-                'name_ar'=>'رابط متجر ابل',
-                'value'=>'',
-                'value_ar'=>'',
-                'key'=>'app_store_link',
-                'type'=>Constant::SETTING_TYPE['Values'],
-            ],
-            'play_store_link'=>[
-                'name'=>'Google Play Store Link',
-                'name_ar'=>' رابط متجر جوجل بلاي',
-                'value'=>'',
-                'value_ar'=>'',
-                'key'=>'play_store_link',
-                'type'=>Constant::SETTING_TYPE['Values'],
-            ],
-        ];
-        foreach ($Settings as $setting){
-            $Setting = new Setting();
-            $Setting->setKey($setting['key']);
-            $Setting->setName($setting['name']);
-            $Setting->setNameAr($setting['name_ar']);
-            $Setting->setValue($setting['value']);
-            $Setting->setValueAr($setting['value_ar']);
-            $Setting->setType($setting['type']);
-            $Setting->save();
-        }
         foreach ($PermissionsAndLinks as $object){
             $Permission = new Permission();
             $Permission->setName($object['name']);
@@ -205,6 +59,7 @@ class InstallSeeder extends Seeder
             $Link->setName($object['name']);
             $Link->setNameAr($object['name_ar']);
             $Link->setUrl($object['key']);
+            $Link->setIcon($object['icon'] ?? null);
             $Link->setPermissionId($Permission->getId());
             $Link->save();
             $Link->refresh();

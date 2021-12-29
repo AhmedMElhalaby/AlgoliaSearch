@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Dashboard\AppData;
+namespace App\Http\Controllers\Dashboard;
 
 use App\Http\Controllers\Dashboard\Controller;
 use App\Models\Tag;
@@ -13,7 +13,7 @@ class TagController extends Controller
 
     public function setup()
     {
-        $this->setRedirect('dashboard/app_data/tags');
+        $this->setRedirect('dashboard/tags');
         $this->setEntity(new Tag());
         $this->setTable('tags');
         $this->setLang('Tag');

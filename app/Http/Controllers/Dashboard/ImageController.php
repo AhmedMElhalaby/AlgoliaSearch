@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Dashboard\AppData;
+namespace App\Http\Controllers\Dashboard;
 
 use App\Http\Controllers\Dashboard\Controller;
 use App\Models\Image;
@@ -12,7 +12,7 @@ class ImageController extends Controller
 
     public function setup()
     {
-        $this->setRedirect('dashboard/app_data/images');
+        $this->setRedirect('dashboard/images');
         $this->setEntity(new Image());
         $this->setTable('images');
         $this->setLang('Image');

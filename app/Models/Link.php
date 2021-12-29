@@ -11,7 +11,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  * @property string name
  * @property string name_ar
  * @property string url
- * @property string icon
+ * @property string|null icon
  * @property integer permission_id
  * @property integer parent_id
  */
@@ -97,20 +97,21 @@ class Link extends Model
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getIcon(): string
+    public function getIcon(): ?string
     {
         return $this->icon;
     }
 
     /**
-     * @param string $icon
+     * @param string|null $icon
      */
-    public function setIcon(string $icon): void
+    public function setIcon(?string $icon): void
     {
         $this->icon = $icon;
     }
+
 
     /**
      * @return int
