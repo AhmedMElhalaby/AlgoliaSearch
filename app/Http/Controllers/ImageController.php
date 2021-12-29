@@ -31,7 +31,7 @@ class ImageController extends Controller
             }else{
                 if ($request->filled('q')) {
                     $q = $request->q;
-                    $Tags = Tag::where('name','Like','%'.$this->q.'%')->pluck('image_id');
+                    $Tags = Tag::where('name','Like','%'.$q.'%')->pluck('image_id');
                     $Images = Image::whereIn('id',$Tags)->get();
                 }
             }
